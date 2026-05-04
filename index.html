@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Приглашение на Никах</title>
+    <!-- Элегантные шрифты -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@200;300;400&family=Amiri:ital@1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    
+    <style>
+        :root {
+            --gold: #C5A059;
+            --deep-green: #0D211B;
+            --white: #FFFFFF;
+        }
+
+        body { margin: 0; font-family: 'Montserrat', sans-serif; background: #F9F9F7; color: var(--deep-green); overflow-x: hidden; }
+
+        /* ИСПРАВЛЕННЫЙ ГЛАВНЫЙ ЭКРАН */
+        header {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            text-align: center;
+            color: var(--white);
+            background-color: var(--deep-green); /* Запасной фон */
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            /* ПРЯМАЯ ССЫЛКА НА МЕЧЕТЬ КУЛ-ШАРИФ */
+            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.2)), 
+                              url('https://images.unsplash.com/photo-1594903332021-36427389140d?q=80&w=2000');
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+        }
+
+        .hero-card {
+            position: relative;
+            z-index: 2;
+            padding: 50px 70px;
+            border: 1px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            background: rgba(13, 33, 27, 0.3);
+        }
+
+        .h-label { font-size: 0.8rem; letter-spacing: 10px; text-transform: uppercase; margin-bottom: 20px; font-weight: 200; }
+        
+        .h-names { 
+            font-family: 'Playfair Display', serif; 
+            font-size: clamp(3rem, 10vw, 6.5rem); 
+            font-style: italic; 
+            margin: 0;
+            font-weight: 400;
+            line-height: 1.1;
+        }
+
+        .h-date { margin-top: 35px; font-size: 1.2rem; letter-spacing: 5px; font-weight: 300; border-top: 1px solid var(--gold); padding-top: 20px; }
+
+        /* ТАЙМЕР */
+        .timer-grid {
+            max-width: 850px;
+            margin: -60px auto 0;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 50px 20px;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.08);
+            position: relative;
+            z-index: 10;
+        }
+
+        .t-num { display: block; font-family: 'Playfair Display', serif; font-size: 3.5rem; color: var(--gold); line-height: 1; }
+        .t-text { font-size: 0.7rem; text-transform: uppercase; color: #AAA; letter-spacing: 3px; margin-top: 15px; }
+
+        section { padding: 120px 20px; text-align: center; }
+
+        .sura-section { background: var(--deep-green); color: white; padding: 100px 40px; }
+        .arabic { font-family: 'Amiri', serif; font-size: 2.6rem; color: var(--gold); margin-bottom: 20px; }
+        .translation { font-family: 'Playfair Display', serif; font-size: 1.7rem; font-style: italic; max-width: 800px; margin: 0 auto; opacity: 0.9; }
+
+        .dress-box { width: 320px; padding: 45px; background: white; border-bottom: 3px solid var(--gold); box-shadow: 0 5px 20px rgba(0,0,0,0.02); }
+        .dress-box h3 { font-family: 'Playfair Display', serif; font-size: 1.9rem; color: var(--gold); margin-bottom: 20px; }
+
+        .signature {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-style: italic;
+            color: var(--gold);
+            margin-top: 50px;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .hero-card { padding: 30px; width: 90%; }
+            .timer-grid { flex-wrap: wrap; gap: 30px; margin-top: -30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="hero-card" data-aos="fade-up">
+            <div class="h-label">The Nikah of</div>
+            <h1 class="h-names">Ilnaz & Azalia</h1>
+            <div class="h-date">11.06.2026 | 16:45</div>
+        </div>
+    </header>
+
+    <div class="timer-grid" data-aos="fade-up">
+        <div class="t-item"><span class="t-num" id="d">00</span><div class="t-text">Дней</div></div>
+        <div class="t-item"><span class="t-num" id="h">00</span><div class="t-text">Часов</div></div>
+        <div class="t-item"><span class="t-num" id="m">00</span><div class="t-text">Минут</div></div>
+        <div class="t-item"><span class="t-num" id="s">00</span><div class="t-text">Секунд</div></div>
+    </div>
+
+    <section class="sura-section" data-aos="zoom-in">
+        <div class="arabic">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُсكُمْ أَزْوَاجًا</div>
+        <p class="translation">«И сотворил Он из вас самих супруг для вас, чтобы вы находили в них успокоение...»</p>
+    </section>
+
+    <section>
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; letter-spacing: 5px;">ДРЕСС-КОД</h2>
+        <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 60px;">
+            <div class="dress-box" data-aos="fade-right">
+                <h3>Для женщин</h3>
+                <p>Торжественный закрытый наряд и платок. Мы ценим скромность и красоту традиций.</p>
+            </div>
+            <div class="dress-box" data-aos="fade-left">
+                <h3>Для мужчин</h3>
+                <p>Классический костюм и национальная тюбетейка. Будем рады видеть вас нарядными.</p>
+            </div>
+        </div>
+    </section>
+
+    <section style="background: #F2F1ED;">
+        <h2 style="font-size: 0.8rem; letter-spacing: 5px; color: #999;">МЕСТО ПРОВЕДЕНИЯ</h2>
+        <p style="font-family: 'Playfair Display', serif; font-size: 2.8rem; margin: 15px 0;">Мечеть «Ирек»</p>
+        <p style="letter-spacing: 3px; font-weight: 300;">КАЗАНЬ, УЛ. ФЕДОСЕЕВСКАЯ, 5</p>
+    </section>
+
+    <section data-aos="fade-up">
+        <p style="max-width: 600px; margin: 0 auto; line-height: 2; font-weight: 300; opacity: 0.8;">
+            Ваши молитвы и присутствие — лучший подарок для нас в этот священный день.
+        </p>
+        <span class="signature">Ilnaz & Azalia</span>
+    </section>
+
+    <footer style="padding: 40px; text-align: center; font-size: 0.7rem; opacity: 0.4; letter-spacing: 3px;">
+        &copy; 2026 NIKAH CEREMONY
+    </footer>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1200, once: true });
+        const weddingDate = new Date("June 11, 2026 16:45:00").getTime();
+        setInterval(() => {
+            const now = new Date().getTime();
+            const gap = weddingDate - now;
+            document.getElementById("d").innerText = Math.floor(gap / (1000 * 60 * 60 * 24));
+            document.getElementById("h").innerText = Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById("m").innerText = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById("s").innerText = Math.floor((gap % (1000 * 60)) / 1000);
+        }, 1000);
+    </script>
+</body>
+</html>
